@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block content %}
+<link rel="stylesheet" href="/static/css/styles.css">
+
+<div class="space-y-6">
+    <div class="flex justify-between items-end">
+        <div>
+            <h3 class="text-3xl font-extrabold text-slate-900 tracking-tight">Employees</h3>
+            <p class="text-slate-500 font-medium">You have <span id="totalCount" class="text-purple-900 font-bold">0</span> staff members registered.</p>
+        </div>
+        <button onclick="toggleModal(true)" class="bg-purple-900 hover:bg-purple-800 text-white font-bold py-2.5 px-6 rounded-xl transition shadow-purple-900/10 flex items-center gap-2">
+            <span class="text-yellow-500 text-lg">+</span> Add Member
+        </button>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table id="employeeTable" class="w-full text-left border-collapse" hidden>
+           <thead class="bg-slate-50 text-slate-500 text-[10px] uppercase tracking-[0.15em] font-black border-b border-slate-200">
+                    <tr>
+                <th class="px-8 py-5 border-r border-slate-200">ID</th>
+                <th class="px-8 py-5 border-r border-slate-200">Employee</th>
+                  <th class="px-8 py-5 border-r border-slate-200">Email</th>
+              <th class="px-8 py-5 border-r border-slate-200">Department</th>
+                        <th class="px-8 py-5 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    </tbody>
+            </table>
+            
+            <div id="loading" class="p-24 text-center">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-purple-900 border-t-yellow-500 mb-4"></div>
+                <p class="text-slate-400 text-sm font-medium uppercase tracking-widest">Loading Records...</p>
+      </div>
+
+            <div id="emptyState" class="p-24 text-center" hidden>
+   <div class="text-6xl mb-4 opacity-20">📂</div>
+                <p class="text-slate-400 font-medium italic">The directory is currently empty.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="historyDrawer" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="toggleDrawer(false)"></div>
+    <div class="absolute inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl flex flex-col">
+        <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50">
+            <div>
+          <h3 id="drawerName" class="text-xl font-bold text-purple-900 uppercase tracking-tighter">Records</h3>
+                <p id="drawerId" class="text-[10px] text-slate-400 font-mono font-bold"></p>
+            </div>
+            <button onclick="toggleDrawer(false)" class="p-2 hover:bg-slate-200 rounded-full transition">✕</button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-8">
+            <table class="w-full text-left border-collapse border border-slate-200">
+         <thead class="text-[10px] uppercase font-black text-slate-400 bg-slate-50 border-b border-slate-200">
+                    <tr>
+               <th class="p-3 border-r border-slate-200">Date</th>
+               <th class="p-3 text-right">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="historyList" class="divide-y divide-slate-200"></tbody>
+   </table>
+      </div>
+    </div>
+</div>
+
+<div id="employeeModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+            <h3 class="text-xl font-bold text-slate-800">New Registration</h3>
+            <button onclick="toggleModal(false)" class="text-slate-400 hover:text-slate-600 transition">✕</button>
+        </div>
+        <form id="employeeForm" class="p-8 space-y-4">
+            <input type="text" id="employee_id" placeholder="Employee ID" class="w-full border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-purple-900 outline-none transition" required>
+            <input type="text" id="full_name" placeholder="Full Name" class="w-full border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-purple-900 outline-none transition" required>
+            <input type="email" id="email" placeholder="Email Address" class="w-full border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-purple-900 outline-none transition" required>
+            <input type="text" id="department" placeholder="Department" class="w-full border border-slate-200 p-3 rounded-xl focus:ring-2 focus:ring-purple-900 outline-none transition" required>
+            <p id="formError" class="text-rose-500 text-xs font-bold text-center"></p>
+            <div class="flex gap-4 pt-2">
+                <button type="button" onclick="toggleModal(false)" class="flex-1 bg-slate-50 text-slate-500 font-bold py-3.5 rounded-xl">Cancel</button>
+                <button type="submit" class="flex-1 bg-purple-900 text-white font-bold py-3.5 rounded-xl">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function toggleModal(show) { document.getElementById('employeeModal').classList.toggle('hidden', !show); }
+    function toggleDrawer(show) { document.getElementById('historyDrawer').classList.toggle('hidden', !show); }
+</script>
+<script src="/static/js/employees.js"></script>
+{% endblock %}

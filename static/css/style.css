@@ -1,0 +1,63 @@
+:root {
+    --indigo-primary: #4f46e5;
+    --sidebar-dark: #1e1b4b;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+#employeeModal > div {
+    animation: slideUp 0.3s ease-out;
+}
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid #818cf8;
+}
+#employeeTable tbody tr {
+    transition: all 0.2s ease;
+}
+#employeeTable tbody tr:hover {
+    background-color: #f8fafc;
+    transform: scale(1.002);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+input:focus {
+    border-color: var(--indigo-primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+.status-select {
+    appearance: none;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 4px 24px 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #475569;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23475569'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+    background-size: 12px;
+    transition: all 0.2s;
+}
+
+.status-select:hover {
+    border-color: #6366f1;
+    background-color: #f1f5f9;
+}
