@@ -64,7 +64,7 @@ HRMS Lite provides a full-stack solution for core HR operations, enabling admini
 ```
 ---
 
-## 📝 Assumptions & Limitations
+## Assumptions & Limitations
 - Single administrator usage (no authentication system)
 - Attendance cannot be marked for future dates
 - Each employee must have a unique email address
@@ -82,7 +82,7 @@ HRMS Lite provides a full-stack solution for core HR operations, enabling admini
 
 ## Notes
 Developed as part of a **Full-Stack Engineering Assignment**, focusing on clean architecture, usability, and maintainability.
-## 🚀 Steps to Run the Project Locally
+## Steps to Run the Project Locally
 
 ### 1. Prerequisites
 - Python 3.8 or higher
