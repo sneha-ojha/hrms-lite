@@ -43,27 +43,35 @@ def get_attendance_records():
 
 @attendancebp.route("/<employee_id>", methods=["POST"])
 def mark_or_update_attendance(employee_id):
-    employee=Employee.query.filter_by(employee_id=employee_id).first()
-    if not employee: return jsonify(error="Employee not found"), 404
-    data=request.get_json()
-    date_str, status=data.get("date"), data.get("status")
-    is_edit=data.get("edit", False)
-    if not date_str or status not in VALID_STATUS:
-        return jsonify(error="Valid Date and Status are required"), 400
+    data = request.get_json()
+    status = data.get("status") # Take exactly what frontend sends
+    date_str = data.get("date")
+
+    if status not in VALID_STATUS:
+        return jsonify(error=f"Invalid status: {status}"), 400
 
     try:
-        att_date=datetime.strptime(date_str, "%Y-%m-%d").date()
-    except ValueError:
+        att_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+    except:
         return jsonify(error="Invalid date format"), 400
-    existing=Attendance.query.filter_by(employee_id=employee_id, date=att_date).first()
-    if existing:
-        existing.status=status
-    else:
-        new_attendance=Attendance(employee_id=employee_id, date=att_date, status=status)
-        db.session.add(new_attendance)
+
+    # FORCE a check by clearing the session to avoid cached "Absent" labels
+    db.session.expire_all() 
     
-    db.session.commit()
-    return jsonify(message="Success"), 200
+    record = Attendance.query.filter_by(employee_id=employee_id, date=att_date).first()
+
+    if record:
+        record.status = status
+    else:
+        record = Attendance(employee_id=employee_id, date=att_date, status=status)
+        db.session.add(record)
+
+    try:
+        db.session.commit()
+        return jsonify(message="Success", saved_status=status), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify(error=str(e)), 500
 @attendancebp.route("/total_present", methods=["GET"])
 def get_total_present():
     totals=db.session.query(

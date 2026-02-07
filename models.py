@@ -35,7 +35,7 @@ class Attendance(db.Model):
         nullable=False
     )
     date=db.Column(db.Date, nullable=False)
-    status=db.Column(db.String(10), nullable=False)
+    status=db.Column(db.String(50), nullable=False)
 
     __table_args__=(
         db.UniqueConstraint("employee_id", "date", name="unique_attendance"),
