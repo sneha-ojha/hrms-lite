@@ -5,11 +5,11 @@
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 HRMS Lite provides a full-stack solution for core HR operations, enabling administrators to maintain a digital employee directory and manage daily attendance records seamlessly.
 
-### ✨ Key Features
+### Key Features
 - **Employee Management**
   - Create, view, and delete employee records
   - Server-side validation for unique Employee IDs and email addresses
@@ -32,7 +32,7 @@ HRMS Lite provides a full-stack solution for core HR operations, enabling admini
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Frontend
 - Vanilla JavaScript (ES6+)
@@ -48,7 +48,7 @@ HRMS Lite provides a full-stack solution for core HR operations, enabling admini
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 ├── app.py              # Main application entry point
@@ -72,7 +72,7 @@ HRMS Lite provides a full-stack solution for core HR operations, enabling admini
 
 ---
 
-## 🎨 Design System
+## Design System
 - **Primary Color:** Purple-900 (`#581c87`)
 - **Accent Color:** Yellow-500 (`#eab308`)
 - **Success Color:** Emerald-600 (`#059669`)
@@ -80,7 +80,7 @@ HRMS Lite provides a full-stack solution for core HR operations, enabling admini
 
 ---
 
-## 📄 Notes
+## Notes
 Developed as part of a **Full-Stack Engineering Assignment**, focusing on clean architecture, usability, and maintainability.
 ## 🚀 Steps to Run the Project Locally
 
@@ -92,7 +92,7 @@ Developed as part of a **Full-Stack Engineering Assignment**, focusing on clean 
 
 ### 2. Clone the Repository
 ```bash
-git clone <your-repository-link>
+git clone https://github.com/sneha-ojha/hrms-lite
 cd hrms-lite
 ```
 ### 3. Create and Activate Virtual Environment
